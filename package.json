@@ -1,0 +1,24 @@
+{
+  "name": "issue_tracking_system",
+  "version": "0.1.0",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-mongo": "^3.2.0",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-flash": "github:RGBboy/express-flash",
+    "express-session": "^1.17.3",
+    "mongoose": "^5.13.5",
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "react-router-dom": "^6.3.0",
+    "validator": "^13.7.0"
+  },
+  "proxy": "http://localhost:2121/"
+}
