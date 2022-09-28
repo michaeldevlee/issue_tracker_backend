@@ -20,5 +20,5 @@
     "react-router-dom": "^6.3.0",
     "validator": "^13.7.0"
   },
-  "proxy": "http://localhost:2121/"
+  "proxy": "https://protofast-backend.onrender.com"
 }
