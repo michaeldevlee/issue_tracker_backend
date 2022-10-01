@@ -41,7 +41,7 @@ app.use(flash())
 // CORS setup
 
 app.use(cors({
-  origin:'https://protofast-backend.onrender.com',
+  origin:'https://protofast-react.onrender.com',
   optionsSuccessStatus: 200
 }))
 app.options('*', cors())
