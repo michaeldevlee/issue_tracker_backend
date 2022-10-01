@@ -41,7 +41,8 @@ app.use(flash())
 // CORS setup
 
 app.use(cors({
-  origin : 'https://protofast-react.onrender.com'
+  origin : 'https://protofast-react.onrender.com',
+  credentials : true,
 }))
 
 app.use('/users', userRoutes)
