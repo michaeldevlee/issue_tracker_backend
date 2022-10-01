@@ -38,14 +38,19 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
   
+// CORS setup
+
+app.use(cors({
+  origin:'https://protofast-backend.onrender.com',
+  optionsSuccessStatus: 200
+}))
+app.options('*', cors())
 
 app.use('/users', userRoutes)
 app.use('/projects', projectRoutes)
 app.use('/', mainRoutes)
 
-app.use(cors({
-  origin:'https://protofast-backend.onrender.com'
-}))
+
 
 
 
