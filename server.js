@@ -14,6 +14,7 @@ const mainRoutes = require('./routes/main')
 const projectRoutes = require('./routes/projects')
 const cors = require('cors');
 
+
 // Passport config
 require('./config/passport')(passport)
 
@@ -32,8 +33,7 @@ app.use(
       store: new MongoStore({ mongooseConnection: mongoose.connection }),
       cookie:{
         maxAge : 1000 * 60 * 60,
-        secure : true,
-        sameSite : 'none'
+        sameSite : 'lax'
       }
     })
   )
