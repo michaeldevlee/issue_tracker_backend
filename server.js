@@ -30,6 +30,11 @@ app.use(
       resave: false,
       saveUninitialized: false,
       store: new MongoStore({ mongooseConnection: mongoose.connection }),
+      cookie:{
+        maxAge : 1000 * 60 * 60,
+        secure : true,
+        sameSite : 'none'
+      }
     })
   )
   
@@ -37,11 +42,12 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
-  
+
+
 // CORS setup
 
 app.use(cors({
-  origin : 'https://protofast-react.onrender.com',
+  origin : ['https://protofast-react.onrender.com', 'http://localhost:3000'],
   credentials : true,
 }))
 
