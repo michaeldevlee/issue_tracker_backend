@@ -47,9 +47,19 @@ app.use(flash())
 
 // CORS setup
 
+app.set("trust proxy", 1);
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Headers",
+  "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-HTTP-Method-Override, Set-Cookie, Cookie");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  next();  
+});  
+
 app.use(cors({
   origin : ['https://protofast-react.onrender.com', 'http://localhost:3000'],
   credentials : true,
+  methods: "GET, POST, PUT, DELETE"
 }))
 
 app.use('/users', userRoutes)
