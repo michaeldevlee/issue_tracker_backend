@@ -22,6 +22,7 @@ connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
+app.use(logger('dev'))
 
 // Sessions
 app.use(
@@ -31,9 +32,9 @@ app.use(
       saveUninitialized: false,
       store: new MongoStore({ mongooseConnection: mongoose.connection }),
       cookie:{
-        maxAge : 1000 * 60 * 60,
-        SameSite : 'none',
-        secure : true,
+        sameSite : process.env.NODE_ENV == 'production' ? 'none' : 'lax',
+        secure : process.env.NODE_ENV == 'production' ? true : false,
+        httpOnly : false,
       }
     })
   )
