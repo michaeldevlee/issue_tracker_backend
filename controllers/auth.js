@@ -34,9 +34,8 @@ const User = require('../models/Users');
       req.logIn(user, (err) => {
         console.log('loggin in');
         if (err) { return next(err) }
-        console.log(res.cookie('connect-sid', {httpOnly : false}));
         // req.flash('success', { msg: 'Success! You are logged in.' })
-        return res.send({cookie : 'hello'})
+        return res.send({user : user})
       })
     })(req, res, next)
   }
