@@ -1,5 +1,4 @@
 const Projects = require('../models/Projects');
-const Users = require('../models/Users');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 module.exports = {
@@ -46,6 +45,7 @@ module.exports = {
                         createdAt : Date.now(),
                     }],
                 })
+
 
                 console.log('new project')
                 return res.send({project : project})

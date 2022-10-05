@@ -12,6 +12,7 @@ const connectDB = require('./config/database');
 const userRoutes = require('./routes/users')
 const mainRoutes = require('./routes/main')
 const projectRoutes = require('./routes/projects')
+const roleRoutes = require('./routes/roles')
 const cors = require('cors');
 
 
@@ -60,6 +61,7 @@ app.use(cors({
 
 app.use('/users', userRoutes)
 app.use('/projects', projectRoutes)
+app.use('/roles' , roleRoutes)
 app.use('/', mainRoutes)
 
 
