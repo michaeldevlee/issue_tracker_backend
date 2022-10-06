@@ -8,6 +8,9 @@ const ProjectSchema = new mongoose.Schema({
     author:{
         type: String,
     },
+    reviewers:{
+        type : Array,
+    },
     collaborators:{
         type:Array,
     },

@@ -2,15 +2,13 @@ const Roles = require('../models/Roles');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 module.exports = {
-    getRoles: async (req, res) =>{
+    getRole: async (req, res) =>{
         try {
-            console.log('getting roles')
             if (req.user){
                 
                 const role = await Roles.find(
-                    {userId : req.user._id},
+                    {project_id : req.body.project_id},
                 )
-                console.log(role)
                 return res.send({role : role})
             }
             else{
@@ -25,10 +23,12 @@ module.exports = {
     createRole : async (req, res) => {
         try {
             if (req.user){
+                console.log(req.body)
+                console.log('body')
                 const role = await Roles.create(
                     {
                         userId : req.user._id,
-                        projectId : req.body.projectId,
+                        project_id : req.body.project_id,
                         role : req.body.role,
                     },
                 )
@@ -46,7 +46,7 @@ module.exports = {
             if (req.user){
                 const role = await Roles.remove(
                     {
-                        userId : req.user._id,
+                        project_id : req.body.project_id,
                     },
                 )
                 console.log(role)

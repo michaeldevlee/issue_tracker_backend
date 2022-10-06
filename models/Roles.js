@@ -4,7 +4,7 @@ const RolesSchema = new mongoose.Schema({
     userId:{
         type: String,
     },
-    projectId:{
+    project_id:{
         type: String,
     },
     role:{

@@ -93,7 +93,7 @@ module.exports = {
                         console.log('deleting issue')
                         const issue_update = await Projects.updateOne(
                             {_id : ObjectId(project_id),},
-                            {$pull:{issues : {id : ObjectId(issue_identifier)}}}
+                            {$pull:{issues : {id : issue_identifier}}}
                             )
                             console.log(issue_update);
                     }
