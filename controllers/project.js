@@ -6,10 +6,8 @@ module.exports = {
         try {
             if (req.user){
                 const projects = await Projects.find(
-                    {collaborators : req.user.userName},
+                    {collaborators : req.user._id},
                 )
-                console.log(req.user.userName)
-                console.log(projects)
                 return res.send({projects : projects})
             }
             else{
@@ -31,7 +29,7 @@ module.exports = {
                 const project = await Projects.create({
                     projectName : projectName,
                     author : author,
-                    collaborators : [author],
+                    collaborators : [ObjectId(req.user._id)],
                     description : description,
                     issues : [{
                         id : issue_id.toString(),
@@ -105,7 +103,7 @@ module.exports = {
                         // add new collaborator
                         const collaborator_update = await Projects.updateOne(
                             {_id : ObjectId(project_id),},
-                            {$addToSet:{collaborators : new_collaborator}}
+                            {$addToSet:{collaborators : ObjectId(new_collaborator)}}
                             )
                             console.log(collaborator_update);
                     }
