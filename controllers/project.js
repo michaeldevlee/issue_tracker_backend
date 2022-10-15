@@ -84,6 +84,24 @@ module.exports = {
                         }}}
                         )
                         console.log(issue_update);
+                    }
+                    else if (action == "EDIT"){
+                        //edit issue
+                        const issue_update = await Projects.updateOne(
+                            {
+                                _id : ObjectId(project_id),
+                            },
+                            {$set:{"issues.$[issue]" : {
+                                title: new_issue.name,
+                                projectName : new_issue.projectName,
+                                description : new_issue.description,
+                                color : new_issue.color,
+                            }}},
+                            {
+                                arrayFilters : [{issue: ObjectId(new_issue._id)}]
+                            }
+                            )
+                        console.log(issue_update);
                     }   
                 }
                 else if (issue_identifier){
