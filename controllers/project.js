@@ -60,9 +60,19 @@ module.exports = {
     updateProject: async (req, res) =>{
         try {
             if (req.user){
-                const {author, name, description, color, projectName, project_id, new_issue, new_collaborator, action, issue_identifier} = req.body;
-                console.log(issue_identifier)
-                console.log(project_id)
+                const {
+                    author, 
+                    name, 
+                    description, 
+                    color, 
+                    projectName, 
+                    project_id, 
+                    new_issue, 
+                    new_collaborator, 
+                    action, 
+                    issue_identifier,
+                    new_review_action,
+                } = req.body;
                 
                 if (new_issue){
                     if(action == "ADD"){
@@ -87,21 +97,37 @@ module.exports = {
                     }
                     else if (action == "EDIT"){
                         //edit issue
+                        console.log('updating issue')
+                        console.log(project_id)
                         const issue_update = await Projects.updateOne(
                             {
                                 _id : ObjectId(project_id),
+                                "issues.id" : new_issue.id, 
                             },
-                            {$set:{"issues.$[issue]" : {
-                                title: new_issue.name,
-                                projectName : new_issue.projectName,
-                                description : new_issue.description,
-                                color : new_issue.color,
-                            }}},
-                            {
-                                arrayFilters : [{issue: ObjectId(new_issue._id)}]
-                            }
+                            {$set:{
+                                "issues.$.title" : name,
+                                "issues.$.description" : description,
+                                "issues.$.color" : color,
+                            }},
                             )
                         console.log(issue_update);
+                    }
+                    else if (action == "REVIEW"){
+                        //edit issue
+                        console.log('updating review issue')
+                        console.log(project_id)
+                        const reivew_update = await Projects.updateOne(
+                            {
+                                _id : ObjectId(project_id),
+                                "issues.id" : new_issue.id, 
+                            },
+                            {$set:{
+                                "issues.$.status" : new_review_action,
+                                "issues.$.reviewer" : req.user._id,
+                            }},
+                            )
+                        console.log(reivew_update);
+
                     }   
                 }
                 else if (issue_identifier){
