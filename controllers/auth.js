@@ -33,6 +33,7 @@ const User = require('../models/Users');
       }
       req.logIn(user, (err) => {
         console.log('loggin in');
+        console.log('give me my cookies')
         if (err) { return next(err) }
         // req.flash('success', { msg: 'Success! You are logged in.' })
         return res.send({user : user})

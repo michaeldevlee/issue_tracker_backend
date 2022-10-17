@@ -25,6 +25,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(logger('dev'))
 
+
+app.set("trust proxy", 1);
+
+  
+// Passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
+
+
 // Sessions
 app.use(
   session({
@@ -41,20 +51,11 @@ app.use(
 )
 
 
-  
-// Passport middleware
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(flash())
-
 
 // CORS setup
 
-app.set("trust proxy", 1);
-
-
 app.use(cors({
-  origin : ['https://protofast-react.onrender.com', 'http://localhost:3000'],
+  origin : ['https://protofast-react.onrender.com', 'http://localhost:2121'],
   credentials : true,
   methods: "GET, POST, PUT, DELETE"
 }))
