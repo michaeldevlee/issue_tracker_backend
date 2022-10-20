@@ -61,12 +61,12 @@ const User = require('../models/Users');
   
   exports.postSignup = (req, res, next) => {
     const validationErrors = []
-    if (!validator.isLength(req.body.password, { min: 8 })) validationErrors.push({ msg: 'Password must be at least 8 characters long' })
-    if (req.body.password !== req.body.confirmPassword) validationErrors.push({ msg: 'Passwords do not match' })
+    if (!validator.isLength(req.body.password, { min: 8 })) validationErrors.push({ error: 'Password must be at least 8 characters long' })
+    if (req.body.password !== req.body.confirmPassword) validationErrors.push({ error: 'Passwords do not match' })
   
     if (validationErrors.length) {
       req.flash('errors', validationErrors)
-      return res.send({message:validationErrors})
+      return res.send({error:validationErrors})
     }
   
     const user = new User({
@@ -82,7 +82,7 @@ const User = require('../models/Users');
       if (err) { return next(err) }
       if (existingUser) {
         req.flash('errors', { msg: 'Account with that email address or username already exists.' })
-        return res.send({message:'user already exists'})
+        return res.send({error:'user already exists'})
       }
       user.save((err) => {
         if (err) { return next(err) }
@@ -90,8 +90,7 @@ const User = require('../models/Users');
           if (err) {
             return next(err)
           }
-          res.send({request : req.user})
-          // res.redirect('/todos')
+          res.send({user : req.user})
         })
       })
     })

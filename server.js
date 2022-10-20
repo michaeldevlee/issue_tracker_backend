@@ -54,7 +54,7 @@ app.set("trust proxy", 1);
 
 
 app.use(cors({
-  origin : ['https://protofast-react.onrender.com', 'http://localhost:2121'],
+  origin : ['https://protofast-react.onrender.com', 'http://localhost:3000'],
   credentials : true,
   methods: "GET, POST, PUT, DELETE"
 }))
